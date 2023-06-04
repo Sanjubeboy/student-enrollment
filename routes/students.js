@@ -49,13 +49,40 @@ router.get('/:id', getStudent, (req, res) => {
 })
 
 //updateStudent
-router.patch('/:id', (req, res) => {
-    res.send(`Updating student with id ${req.params.id}`)
+router.patch('/:id', getStudent,async (req, res) => {
+    if(req.body.name != null)
+    {
+        res.student.name = req.body.name
+    }
+    if(req.body.enrolledDepartment != null)
+    {
+        res.student.enrolledDepartment = req.body.enrolledDepartment
+    }
+    if(req.body.enrollmentDate != null)
+    {
+        res.student.enrollmentDate = req.body.enrollmentDate
+    }
+
+    try{
+        const updatedStudent = await res.student.save()
+        res.status(200).json(updatedStudent)
+    }
+
+    catch(error){
+        res.status(400).json({message: error.message})
+    }
 })
 
 //deleteStudent
-router.delete('/:id', (req, res) => {
-    res.send(`Deleting student with id ${req.params.id}`)
+router.delete('/:id', getStudent, async(req, res) => {
+    try{
+        await res.student.deleteOne()
+        res.status(200).json({message: `Deleted the user ${res.student.name}`})
+    }
+
+    catch(error){
+        res.status(400).json({message: error.message})
+    }
 })
 
 

@@ -14,8 +14,11 @@ const addStudents = async(req, res) => {
     const newStudent = new studentModel({
         name: req.body.name,
         enrolledDepartment: req.body.enrolledDepartment,
-        enrollmentDate: req.body.enrollmentDate
+        enrollmentDate: req.body.enrollmentDate,
+        studentImage: req.file.path
     })
+
+    console.log(req.file.path)
 
     try{
         const students = await newStudent.save()

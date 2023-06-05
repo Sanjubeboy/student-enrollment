@@ -4,6 +4,7 @@ const app = express()
 const PORT = 3500
 const students = require('./routes/students')
 const mongoose = require('mongoose')
+const multer = require('multer')
 
 
 app.use(express.json())

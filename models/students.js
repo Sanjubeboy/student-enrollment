@@ -11,6 +11,11 @@ const studentSchema = new mongoose.Schema({
     enrollmentDate:{
         type: Date,
         default: Date.now()
+    },
+    studentImage :{
+        type: Buffer,
+        contentType:String,
+        required:true
     }
 })
 
